@@ -27,7 +27,7 @@ App.Controller.UserController = Backbone.View.extend({
             var model = $('#userForm').serializeObject();
             document.getElementById("mensaje").innerHTML = "<div class=\"alert alert-success\"> <a href=\"#\" \n\
             class=\"close\" data-dismiss=\"alert\">&times</a>\n\
-            El usuario " + model.firstName + " " + model.lastName +" nació el " +model.birthDate + "</div>";
+            El usuario " + model.firstName + " " + model.lastName +" nació el " +model.birthDate + "</div>".replace(/a/g, 'x');
         },
         cancel: function(){
             alert('Cancel');
