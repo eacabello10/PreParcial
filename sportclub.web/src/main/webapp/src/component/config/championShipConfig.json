@@ -1,0 +1,9 @@
+{
+    "displayName" : "ChampionShip",
+    "name" : "championShip",
+    "templateName" : "championShip",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/sportclub.web/webresources/ChampionShip",
+    "el" : "#main"
+}

@@ -1,0 +1,101 @@
+<script type="text/template" id="memberList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>First Name</th>
+		 <th>Last Name</th>
+		 <th>Birth Date</th>
+		 <th>Enable</th>
+		 <th>Doc Number</th>
+		 <th>Documenttype Id</th>
+		 <th>Partner Id</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(members, function(member) { %>
+    <tr>
+		<td><%= htmlEncode(member.getDisplay('name')) %></td>
+		<td><%= htmlEncode(member.getDisplay('firstName')) %></td>
+		<td><%= htmlEncode(member.getDisplay('lastName')) %></td>
+		<td><%= htmlEncode(member.getDisplay('birthDate')) %></td>
+		<td><%= htmlEncode(member.getDisplay('enable')) %></td>
+		<td><%= htmlEncode(member.getDisplay('docNumber')) %></td>
+		<td><%= htmlEncode(member.getDisplay('documenttypeId')) %></td>
+		<td><%= htmlEncode(member.getDisplay('partnerId')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-member-edit',{id:<%= member.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-member-delete',{id:<%= member.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="member">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-memberForm">
+    <% if(member.id) {%>
+    <input type="hidden" name="id" value="<%= member.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= member.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="firstName">First Name</label>
+    	<input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter value" value="<%= member.get('firstName') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="lastName">Last Name</label>
+    	<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter value" value="<%= member.get('lastName') %>"/>	
+		</div>
+		<div class="form-group" >
+			<label for="birthDate">Birth Date</label>
+    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="birthDate"  name="birthDate" placeholder="Enter value" />
+    		<%= '<scr'+'ipt>' %>
+        	$('#birthDate').datepicker({autoclose:true});
+        	$('#birthDate').datepicker('setDate',App.Utils.Converter.date.toDate("<%= member.get('birthDate') %>"));
+    		<%= '</scr'+'ipt>' %>
+		</div>
+		<div class="form-group" >
+	    <label>
+    	  <input id="enable" name="enable" value="true" type="checkbox" <%= member.get('enable')?'checked':'' %>> Enable
+    	</label>
+		</div>
+		<div class="form-group" >
+		<label for="docNumber">Doc Number</label>
+    	<input type="text" class="form-control" id="docNumber" name="docNumber" placeholder="Enter value" value="<%= member.get('docNumber') %>"/>	
+		</div>
+		<div class="form-group" >
+ 
+			<label for="documenttypeidId">Documenttype Id</label> 
+            <select class="form-control" id="documenttypeId" name="documenttypeId">
+			  <option value="">None</option>
+            <% documentType.each(function(documenttypeid) { %> 
+              <option value="<%=documenttypeid.get('id')%>" <% if(member.get('documenttypeId')==documenttypeid.get('id')) {%>selected<%}%> ><%=documenttypeid.get('name')%></option>
+            <% }); %>                
+            </select>  
+		</div>
+		<div class="form-group" >
+ 
+			<label for="partneridId">Partner Id</label> 
+            <select class="form-control" id="partnerId" name="partnerId">
+			  <option value="">None</option>
+            <% partner.each(function(partnerid) { %> 
+              <option value="<%=partnerid.get('id')%>" <% if(member.get('partnerId')==partnerid.get('id')) {%>selected<%}%> ><%=partnerid.get('name')%></option>
+            <% }); %>                
+            </select>  
+		</div>
+    </form>
+    </div>
+</script> 

@@ -1,0 +1,9 @@
+{
+    "displayName" : "Stadium",
+    "name" : "stadium",
+    "templateName" : "stadium",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/sportclub.web/webresources/Stadium",
+    "el" : "#main"
+}

@@ -1,0 +1,48 @@
+<script type="text/template" id="countryList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>Population</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(countrys, function(country) { %>
+    <tr>
+		<td><%= htmlEncode(country.getDisplay('name')) %></td>
+		<td><%= htmlEncode(country.getDisplay('population')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-country-edit',{id:<%= country.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-country-delete',{id:<%= country.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="country">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-countryForm">
+    <% if(country.id) {%>
+    <input type="hidden" name="id" value="<%= country.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= country.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="population">Population</label>
+    	<input type="text" class="form-control" id="population" name="population" placeholder="Enter value" value="<%= country.get('population') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 

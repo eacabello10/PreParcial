@@ -1,0 +1,9 @@
+{
+    "displayName" : "City",
+    "name" : "city",
+    "templateName" : "city",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/sportclub.web/webresources/City",
+    "el" : "#main"
+}

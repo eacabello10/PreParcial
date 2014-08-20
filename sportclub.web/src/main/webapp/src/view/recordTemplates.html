@@ -1,0 +1,60 @@
+<script type="text/template" id="recordList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>Record</th>
+		 <th>Measureunit Id</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(records, function(record) { %>
+    <tr>
+		<td><%= htmlEncode(record.getDisplay('name')) %></td>
+		<td><%= htmlEncode(record.getDisplay('record')) %></td>
+		<td><%= htmlEncode(record.getDisplay('measureunitId')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-record-edit',{id:<%= record.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-record-delete',{id:<%= record.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="record">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-recordForm">
+    <% if(record.id) {%>
+    <input type="hidden" name="id" value="<%= record.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= record.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="record">Record</label>
+    	<input type="text" class="form-control" id="record" name="record" placeholder="Enter value" value="<%= record.get('record') %>"/>	
+		</div>
+		<div class="form-group" >
+ 
+			<label for="measureunitidId">Measureunit Id</label> 
+            <select class="form-control" id="measureunitId" name="measureunitId">
+			  <option value="">None</option>
+            <% measureUnit.each(function(measureunitid) { %> 
+              <option value="<%=measureunitid.get('id')%>" <% if(record.get('measureunitId')==measureunitid.get('id')) {%>selected<%}%> ><%=measureunitid.get('name')%></option>
+            <% }); %>                
+            </select>  
+		</div>
+    </form>
+    </div>
+</script> 

@@ -1,0 +1,9 @@
+{
+    "displayName" : "Country",
+    "name" : "country",
+    "templateName" : "country",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/sportclub.web/webresources/Country",
+    "el" : "#main"
+}

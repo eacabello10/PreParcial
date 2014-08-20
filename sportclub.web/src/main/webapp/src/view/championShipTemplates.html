@@ -1,0 +1,62 @@
+<script type="text/template" id="championShipList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Nombre</th>
+		 <th>Fecha Inicio</th>
+		 <th>Fecha Fin</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(championShips, function(championShip) { %>
+    <tr>
+		<td><%= htmlEncode(championShip.getDisplay('name')) %></td>
+		<td><%= htmlEncode(championShip.getDisplay('startDate')) %></td>
+		<td><%= htmlEncode(championShip.getDisplay('endDate')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-championShip-edit',{id:<%= championShip.id %>}); return false" >Editar</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-championShip-delete',{id:<%= championShip.id %>}); return false" >Eliminar</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="championShip">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-championShipForm">
+    <% if(championShip.id) {%>
+    <input type="hidden" name="id" value="<%= championShip.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Nombre</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= championShip.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+			<label for="startDate">Fecha Inicio</label>
+    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="startDate"  name="startDate" placeholder="Enter value" />
+    		<%= '<scr'+'ipt>' %>
+        	$('#startDate').datepicker({autoclose:true});
+        	$('#startDate').datepicker('setDate',App.Utils.Converter.date.toDate("<%= championShip.get('startDate') %>"));
+    		<%= '</scr'+'ipt>' %>
+		</div>
+		<div class="form-group" >
+			<label for="endDate">Fecha Fin</label>
+    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="endDate"  name="endDate" placeholder="Enter value" />
+    		<%= '<scr'+'ipt>' %>
+        	$('#endDate').datepicker({autoclose:true});
+        	$('#endDate').datepicker('setDate',App.Utils.Converter.date.toDate("<%= championShip.get('endDate') %>"));
+    		<%= '</scr'+'ipt>' %>
+		</div>
+    </form>
+    </div>
+</script> 

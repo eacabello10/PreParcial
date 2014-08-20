@@ -1,0 +1,9 @@
+{
+    "displayName" : "Prize",
+    "name" : "prize",
+    "templateName" : "prize",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/sportclub.web/webresources/Prize",
+    "el" : "#main"
+}

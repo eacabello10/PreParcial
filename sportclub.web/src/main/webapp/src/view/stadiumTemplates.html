@@ -1,0 +1,62 @@
+<script type="text/template" id="stadiumList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>Capacity</th>
+                 <th>Clasificacion</th>
+		 <th>City Id</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(stadiums, function(stadium) { %>
+    <tr>
+		<td><%= htmlEncode(stadium.getDisplay('name')) %></td>
+		<td><%= htmlEncode(stadium.getDisplay('capacity')) %></td>
+                <td><a onclick="Backbone.trigger('<%= componentId %>-stadium-show-average',{capacity:<%= htmlEncode(stadium.getDisplay('capacity')) %>}); return false;" >Ver Clasificacion</a></td>
+                <td><%= htmlEncode(stadium.getDisplay('cityId')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-stadium-edit',{id:<%= stadium.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-stadium-delete',{id:<%= stadium.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="stadium">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-stadiumForm">
+    <% if(stadium.id) {%>
+    <input type="hidden" name="id" value="<%= stadium.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= stadium.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="capacity">Capacity</label>
+    	<input type="text" class="form-control" id="capacity" name="capacity" placeholder="Enter value" value="<%= stadium.get('capacity') %>"/>	
+		</div>
+		<div class="form-group" >
+ 
+			<label for="cityidId">City Id</label> 
+            <select class="form-control" id="cityId" name="cityId">
+			  <option value="">None</option>
+            <% city.each(function(cityid) { %> 
+              <option value="<%=cityid.get('id')%>" <% if(stadium.get('cityId')==cityid.get('id')) {%>selected<%}%> ><%=cityid.get('name')%></option>
+            <% }); %>                
+            </select>  
+		</div>
+    </form>
+    </div>
+</script> 

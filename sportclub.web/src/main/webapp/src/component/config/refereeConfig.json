@@ -1,0 +1,9 @@
+{
+    "displayName" : "Referee",
+    "name" : "referee",
+    "templateName" : "referee",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/sportclub.web/webresources/Referee",
+    "el" : "#main"
+}

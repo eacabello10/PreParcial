@@ -1,0 +1,9 @@
+{
+    "displayName" : "Member",
+    "name" : "member",
+    "templateName" : "member",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/sportclub.web/webresources/Member",
+    "el" : "#main"
+}
