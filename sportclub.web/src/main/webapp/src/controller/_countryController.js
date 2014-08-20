@@ -173,7 +173,7 @@ define(['model/countryModel'], function(countryModel) {
         },
         
         language: function(){
-            alert('Usted esta viendo la version en ESPANOL de esta paginao');
+            alert('Usted esta viendo la version en ESPANOL de esta paginas');
         }
         
     });
