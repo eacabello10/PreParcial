@@ -32,7 +32,21 @@ define(['component/_CRUDComponent', 'controller/toolbarController', 'model/toolb
         name: 'profesor',
         model: App.Model.ProfesorModel,
         listModel: App.Model.ProfesorList,
-        controller : App.Controller.ProfesorController
+        controller : App.Controller.ProfesorController,
+         postInit: function(){
+            var self = this;
+            
+            this.toolbarModel.set('createName', 'Crear');
+            this.toolbarModel.set('refreshName', 'Refrescar');
+            this.toolbarModel.set('showPrint', false);
+            this.toolbarModel.set('showSearch', false);
+            this.toolbarModel.set('saveName', 'Guardar');
+            this.toolbarModel.set('cancelName', 'Cancelar');
+
+            Backbone.on(self.componentId + '-profesor-show-average', function(params) {
+                self.componentController.average(params);
+            });
+        }
     });
     return App.Component.ProfesorComponent;
 });
